@@ -1,15 +1,23 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import Vue from 'vue/dist/vue.js'
+import Axios from 'axios'
+import VueRouter from 'vue-router'
+import VueCountUp from 'vue-countupjs'
+import routes from './router/router'
+import Echarts from 'echarts'
+import './style/common.css'
+import './style/swiper.min.css'
 
-Vue.config.productionTip = false
+Vue.prototype.$echarts = Echarts
+Vue.prototype.$axios = Axios
+Vue.prototype.$websocket = new WebSocket("ws://101.201.122.196:18085/brand-api/websocket"); //ws://101.201.122.196:18085/brand-api/websocket"
+Vue.prototype.$baseUrl = "http://brand.tq-service.com/brand-api1"
+Vue.prototype.$wsId = ""
 
-/* eslint-disable no-new */
+Vue.use(VueRouter)
+Vue.use(VueCountUp)
+const router = new VueRouter({
+    routes
+});
 new Vue({
-    el: '#app',
-    router,
-    components: { App },
-    template: '<App/>'
-})
+    router
+}).$mount('#app')
